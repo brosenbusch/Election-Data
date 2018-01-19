@@ -34,8 +34,18 @@ function totalVotes(array,state){
 }
 
 //fifth bullet point
-function statesWon(array,candidate){
+function statesWon(array,candidate,state){
     let won = [];
-    let number = array.obamaVote - array.romneyVote;
-    
+    for(let x=0; x<array.length; x++){
+        let number = array.obamaVote - array.romneyVote;
+        if(candidate = "Obama" && number > 0){
+            won.push([array[x].state,array[x].county, array[x].obamaPercent]);
+        }
+        else if(candidate = "Romney" && number < 0){
+            won.push([array[x].state,array[x].county, array[x].romneyPercent]);
+        }
+        else{
+            null;
+        }
+    }
 }
