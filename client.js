@@ -44,6 +44,7 @@ function totalVotes(array,stateAbbreviation){
     givenState = givenState.sort(function(a,b){
       return a.obamaVote+a.romneyVote - (b.obamaVote+b.romneyVote)//a.obamaVote - b.obamaVote
     });
+    return givenState;
 }
 
 //5th dash of readme
@@ -65,26 +66,41 @@ function statesWon(array, candidate,state){
 
 //6th dash of readme & FIX ARRAY NUMBER
 function percentDifference(array){
-  let temp = Math.abs(array[0].obamaPercent - array[0].romneyPercent);
-  let state = [];
+  let temp;
+  let state;
+  for(let x = 1; x<array.length; x++){
+      if(array[x].fips !==0){
+          temp = Math.abs(array[x].obamaPercent - array[x].romneyPercent);
+          state = array[x].state;
+          break;
+      }
+  }
   for(let x = 1;x<array.length;x++){
     if(array[x].fips == 0){
         continue;
     }
     else if(Math.abs(array[x].obamaPercent - array[x].romneyPercent) >= temp){
         temp = Math.abs(array[x].obamaPercent - array[x].romneyPercent);
+        state = array[x].state;
     }
     else if(Math.abs(array[x].obamaPercent - array[x].romneyPercent) < temp){
         continue;
     }
   }
-  return temp;
+  return state;
 }
 
 //7th dash of readme
 function voteDifference(array){
-  let temp = Math.abs(array[0].obamaVote - array[0].romneyVote);
-  let state = [];
+  let temp;
+  let state;
+  for(let x = 1; x<array.length; x++){
+      if(array[x].fips !==0){
+          temp = Math.abs(array[x].obamaVote- array[x].romneyVote);
+          state = array[x].state;
+          break;
+      }
+  }
   for(let x = 1;x<array.length;x++){
     if(array[x].fips == 0){
         continue;
@@ -96,5 +112,5 @@ function voteDifference(array){
         continue;
     }
   }
-  return temp;
+  return state;
 }
